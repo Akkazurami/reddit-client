@@ -1,0 +1,24 @@
+header {
+    background: darkgreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    height: 3em;
+    display: inline-block;
+    padding: 1em;
+}
+
+h1 {
+    display: inline;
+    color: orangered;
+    font-weight: 400;
+}
+
+strong {
+    font-weight: 900;
+    color: lightgreen;
+    font-style: italic;
+}
