@@ -1,0 +1,17 @@
+.categories {
+    color: lightgreen;
+    background-color: green;
+    box-shadow: 5px 5px 5px darkgreen;
+    border-radius: 15px;
+    margin: 86px 20px 0 15%;
+    flex-grow: 1;
+}
+
+h3 {
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+.active {
+    font-weight: bold;
+}

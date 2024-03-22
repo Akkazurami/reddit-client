@@ -1,0 +1,8 @@
+.article-list {
+    margin: 86px 25% 0 0;
+    padding-bottom: 25px;
+    flex-grow: 1;
+    background-color: green;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 5px darkgreen;
+}

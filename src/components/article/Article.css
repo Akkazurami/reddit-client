@@ -1,0 +1,61 @@
+article {
+    position: relative;
+    top: 25px;
+    border-radius: 10px;
+    color: gray;
+    background-color: rgb(236, 233, 233);
+    width: 95%;
+    margin: 0 auto 20px;
+    display: flex;
+    box-shadow: 5px 5px 5px black;
+}
+
+.vote {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin-top: 10%;
+    align-items: center;
+
+}
+
+.vote span {
+    margin: 10px 0;
+}
+
+.article {
+    width: 85%;
+}
+
+.article h2 {
+    margin: 20px;
+}
+
+.article img {
+    width: 70%;
+    margin: 0 20px;
+}
+
+.divider {
+    margin: 10px 20px 0 20px;
+    border: 1px solid gray;
+}
+
+.byline {
+    display: flex;
+    justify-content: space-around;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.comments {
+    display: flex;
+    align-items: center;
+}
+
+.comments p {
+    margin-left: 10px;
+}
