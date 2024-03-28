@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Categories.css';
+
+import { changeCategory, selectCategory } from './categoriesSlice';
 
 const categories = [
     "Popular",
@@ -8,18 +11,24 @@ const categories = [
     "Writing"
 ];
 
-const currentCategory = "Popular"
-
 export default function Categories(props) {
+    const dispatch = useDispatch();
+
+    const category = useSelector(selectCategory);
+
+    const handleClick = (e) => {
+        dispatch(changeCategory(e.target.innerHTML));
+    }
+    
     return (
         <section className='categories'>
             <h3>Categories</h3>
             <ul>
-                {categories.map(category => {
-                    if (currentCategory === category) {
-                        return <li className='active'>{category}</li>
+                {categories.map(option => {
+                    if (option === category) {
+                        return <li className='active'>{option}</li>
                     } else {
-                        return <li>{category}</li>
+                        return <li onClick={handleClick}>{option}</li>
                     }
                 })}
             </ul>
