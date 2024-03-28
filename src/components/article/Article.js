@@ -5,25 +5,25 @@ import { faArrowUp, faArrowDown, faMessage } from '@fortawesome/free-solid-svg-i
 import redditAlien from '../../assets/reddit-alien.png';
 import './Article.css';
 
-export default function Article(props) {
+export default function Article({article}) {
     return (
         <article>
             <div className='vote'>
                 <FontAwesomeIcon icon={faArrowUp} color='darkgray'/>
-                <span>123</span>
+                <span>{article.voteCount}</span>
                 <FontAwesomeIcon icon={faArrowDown} color='darkgray'/>
             </div>
             <div className='article'>
-                <h2>This is an article title!</h2>
-                <img src={redditAlien} />
+                <h2>{article.title}</h2>
+                <img src={article.imgSrc} />
                 <div className='divider' />
                 <div className='byline'>
-                    <p>Posted by <span className='author'>Author</span></p>
-                    <p>1 hour ago</p>
+                    <p>Posted by <span className='author'>{article.author}</span></p>
+                    <p>{article.time}</p>
                     <p> | </p>
                     <div className='comments'>
                         <FontAwesomeIcon icon={faMessage} color='darkgray'/>
-                        <p>456</p>
+                        <p>{article.commentCount}</p>
                     </div>
                 </div>
             </div>

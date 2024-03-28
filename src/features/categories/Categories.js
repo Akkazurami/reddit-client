@@ -26,9 +26,9 @@ export default function Categories(props) {
             <ul>
                 {categories.map(option => {
                     if (option === category) {
-                        return <li className='active'>{option}</li>
+                        return <li className='active' key={option}>{option}</li>
                     } else {
-                        return <li onClick={handleClick}>{option}</li>
+                        return <li onClick={handleClick} key={option}>{option}</li>
                     }
                 })}
             </ul>
