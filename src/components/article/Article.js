@@ -2,7 +2,6 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown, faMessage } from '@fortawesome/free-solid-svg-icons';
-import redditAlien from '../../assets/reddit-alien.png';
 import './Article.css';
 
 export default function Article({article}) {

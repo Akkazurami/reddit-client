@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './Categories.css';
 
@@ -26,9 +27,9 @@ export default function Categories(props) {
             <ul>
                 {categories.map(option => {
                     if (option === category) {
-                        return <li className='active' key={option}>{option}</li>
+                        return <Link to={`../category/${option}`} ><li className='active' key={option}>{option}</li></Link> 
                     } else {
-                        return <li onClick={handleClick} key={option}>{option}</li>
+                        return <Link to={`../category/${option}`} ><li onClick={handleClick} key={option}>{option}</li></Link>
                     }
                 })}
             </ul>
