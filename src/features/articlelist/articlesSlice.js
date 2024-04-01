@@ -6,6 +6,7 @@ const articlesSlice = createSlice({
     name: 'articles',
     initialState: [
         {
+            id: "ib123",
             voteCount: '456',
             title: 'This is an article title!',
             imgSrc: redditAlien,
@@ -14,6 +15,7 @@ const articlesSlice = createSlice({
             commentCount: '123'
         },
         {
+            id: "Hxlw7",
             voteCount: '789',
             title: 'This is another article title!',
             imgSrc: redditAlien,

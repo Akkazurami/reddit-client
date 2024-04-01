@@ -10,6 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { ArticleList } from './features/articlelist/ArticleList';
+import Article from './components/article/Article.js';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "category/:category",
         element: <ArticleList />
+      },
+      {
+        path: "article/:articleId",
+        element: <Article />
       }
     ]
   }
