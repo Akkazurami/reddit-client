@@ -17,6 +17,10 @@
     text-align: center;
 }
 
+.article-title {
+    font-size: 40px;
+}
+
 .body {
     display: flex;
     justify-content: space-between;

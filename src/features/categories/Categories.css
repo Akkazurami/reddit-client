@@ -9,7 +9,8 @@
 }
 
 a {
-    color: lightgreen; 
+    color: lightgreen;
+    text-decoration: none; 
 }
 
 h3 {

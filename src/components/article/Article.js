@@ -5,21 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import redditAlien from '../../assets/reddit-alien.png';
 
+import { selectArticle } from "../../features/articlelist/articlesSlice";
+import { useSelector } from "react-redux";
+
 export default function Article() {
+    const article = useSelector(selectArticle);
+
     return (
         <article className="article">
             <div className="title">
-                <h2>This is an Article Title!</h2>
+                <h2 className="article-title">{article.title}</h2>
                 <div className="divider" />
                 <div className="byline">
-                    <p>Posted by <span className="author">Author</span></p>
-                    <p>1 hour ago</p>
+                    <p>Posted by <span className="author">{article.author}</span></p>
+                    <p>{article.time}</p>
                 </div>
             </div>
             <div className="body">
                 <div className="vote">
                     <FontAwesomeIcon icon={faArrowUp} color='darkgray' />
-                    <span>123</span>
+                    <span>{article.voteCount}</span>
                     <FontAwesomeIcon icon={faArrowDown} color="darkgray" />
                 </div>
                 <div className="text">

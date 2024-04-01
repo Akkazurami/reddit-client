@@ -3,8 +3,18 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown, faMessage } from '@fortawesome/free-solid-svg-icons';
 import './Card.css';
+import { Link } from 'react-router-dom';
+
+import { changeCurrentArticle } from '../../features/articlelist/articlesSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Card({article}) {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(changeCurrentArticle(article.id));
+    }
+
     return (
         <article>
             <div className='vote'>
@@ -13,7 +23,7 @@ export default function Card({article}) {
                 <FontAwesomeIcon icon={faArrowDown} color='darkgray'/>
             </div>
             <div className='card'>
-                <h2>{article.title}</h2>
+                <Link to={`../article/${article.id}`}><h2 className='card-title' onClick={handleClick}>{article.title}</h2></Link>
                 <img src={article.imgSrc} />
                 <div className='divider' />
                 <div className='byline'>

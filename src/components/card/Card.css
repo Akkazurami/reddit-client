@@ -24,6 +24,15 @@ article {
     margin: 10px 0;
 }
 
+a h2{
+    color: darkgray;
+    text-decoration: none;
+}
+
+.card-title {
+    color: gray;
+}
+
 .card {
     width: 85%;
 }
