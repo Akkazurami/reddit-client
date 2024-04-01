@@ -7,6 +7,7 @@ import redditAlien from '../../assets/reddit-alien.png';
 
 import { selectArticle } from "../../features/articlelist/articlesSlice";
 import { useSelector } from "react-redux";
+import CommentList from "../../features/commentlist/CommentList";
 
 export default function Article() {
     const article = useSelector(selectArticle);
@@ -71,6 +72,7 @@ export default function Article() {
                         dui accumsan sit. Dolor purus non enim praesent elementum facilisis leo vel.</p>
                 </div>
             </div>
+            <CommentList />
         </article>
     )
 }

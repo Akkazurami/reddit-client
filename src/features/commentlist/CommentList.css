@@ -1,0 +1,15 @@
+.comments {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30px 0;
+    background-color: green;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px gray;
+}
+
+.comments-title {
+    color: rgb(236, 233, 233);
+    font-size: 25px;
+    margin: 0;
+}

@@ -1,0 +1,11 @@
+.comment {
+    position: relative;
+    top: 25px;
+    border-radius: 10px;
+    color: rgb(80, 79, 79);
+    background-color: rgb(211, 211, 211);
+    width: 95%;
+    margin: 0 auto 20px;
+    display: flex;
+    box-shadow: 5px 5px 5px black;
+}

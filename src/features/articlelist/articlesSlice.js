@@ -32,7 +32,7 @@ const articlesSlice = createSlice({
             return {...state, currentArticleId: action.payload}
         },
         changeArticles(state, action) {
-            return action.payload;
+            return {...state, articles: action.payload};
         }
     }
 })
