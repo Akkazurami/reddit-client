@@ -30,8 +30,6 @@ export default function Article(props) {
             </article>
         )
     }
-    
-    console.log(article);
 
     let content;
     if (article.data.post_hint === "image") {
@@ -39,7 +37,15 @@ export default function Article(props) {
     } else if (article.data.post_hint === "hosted:video") {
         content = (<video typeof="video/mp4" src={article.data.secure_media.reddit_video.fallback_url} width="80%" controls />)
     } else {
-        content = (<p>{article.data.selftext}</p>)
+        const text = article.data.selftext.split("\n");
+        console.log(text);
+        content = (
+            <div className="text">
+                {text.map(paragraph => {
+                    return <p>{paragraph}</p>
+                })}
+            </div>
+        )
     }
 
     const timeSince = timeSinceCreation(article.data.created);

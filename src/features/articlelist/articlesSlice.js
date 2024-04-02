@@ -20,7 +20,6 @@ export const loadArticle = createAsyncThunk(
                 method: 'GET'
             })
             .then(response => response.json());
-        console.log(response);
         return response;
     }
 )
