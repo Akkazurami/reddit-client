@@ -6,6 +6,7 @@
     margin: 86px 20px 0 15%;
     flex-grow: 1;
     height: 300px;
+    max-width: 300px;
 }
 
 a {

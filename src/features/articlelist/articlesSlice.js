@@ -1,46 +1,102 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import redditAlien from '../../assets/reddit-alien.png';
+export const loadArticles = createAsyncThunk(
+    'articles/loadArticles',
+    async (parameters) => {
+        const response = await fetch(`https://www.reddit.com/${parameters}.json`,
+            {
+                method: 'GET'
+            })
+            .then(response => response.json());
+        return response;
+    }
+)
+
+export const loadArticle = createAsyncThunk(
+    'articles/loadArticle',
+    async (articleId) => {
+        const response = await fetch(`https://www.reddit.com/${articleId}.json`,
+            {
+                method: 'GET'
+            })
+            .then(response => response.json());
+        console.log(response);
+        return response;
+    }
+)
 
 const articlesSlice = createSlice({
     name: 'articles',
     initialState: {
-        currentArticleId: "",
-        articles: [
-            {
-                id: "ib123",
-                voteCount: '456',
-                title: 'This is an article title!',
-                imgSrc: redditAlien,
-                author: 'Author',
-                time: '1 hour ago',
-                commentCount: '123'
-            },
-            {
-                id: "Hxlw7",
-                voteCount: '789',
-                title: 'This is another article title!',
-                imgSrc: redditAlien,
-                author: 'Different Author',
-                time: '2 days ago',
-                commentCount: '205'
-            }
-        ]
+        currentArticle: "",
+        articles: [],
+        loadingArticles: false,
+        failedToLoadArticles: false
     },
     reducers: {
         changeCurrentArticle(state, action) {
-            return {...state, currentArticleId: action.payload}
+            return {...state, currentArticle: action.payload}
         },
         changeArticles(state, action) {
             return {...state, articles: action.payload};
+        }
+    },
+    extraReducers: {
+        [loadArticles.pending]: (state) => {
+            return {
+                ...state,
+                loadingArticles: true,
+                failedToLoadArticles: false
+            }
+        },
+        [loadArticles.fulfilled]: (state, action) => {
+            const data = action.payload.data.children;
+
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: false,
+                articles: data
+            }
+        },
+        [loadArticles.rejected]: (state) => {
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: true
+            }
+        },
+        [loadArticle.pending]: (state) => {
+            return {
+                ...state,
+                loadingArticles: true,
+                failedToLoadArticles: false
+            }
+        },
+        [loadArticle.fulfilled]: (state, action) => {
+            const data = action.payload[0].data.children[0];
+
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: false,
+                currentArticle: data
+            }
+        },
+        [loadArticle.rejected]: (state) => {
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: true
+            }
         }
     }
 })
 
 export const selectArticles = (state) => state.articles.articles;
-export const selectArticle = (state) => state.articles.articles.filter(article => article.id === state.articles.currentArticleId)[0];
+export const selectCurrentArticle = (state) => state.articles.currentArticle;
+export const isLoadingArticles = (state) => state.articles.loadingArticles;
 
-export const { changeArticles } = articlesSlice.actions;
-export const { changeCurrentArticle } = articlesSlice.actions;
+export const { changeArticles, changeCurrentArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

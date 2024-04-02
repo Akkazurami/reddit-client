@@ -5,34 +5,51 @@ import { faArrowUp, faArrowDown, faMessage } from '@fortawesome/free-solid-svg-i
 import './Card.css';
 import { Link } from 'react-router-dom';
 
-import { changeCurrentArticle } from '../../features/articlelist/articlesSlice';
-import { useDispatch } from 'react-redux';
+import { changeCurrentArticle, selectArticles } from '../../features/articlelist/articlesSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { timeSinceCreation } from '../../util/util';
 
 export default function Card({article}) {
     const dispatch = useDispatch();
 
+    const articles = useSelector(selectArticles);
+
     const handleClick = () => {
-        dispatch(changeCurrentArticle(article.id));
+        const currentArticle = articles.filter(listArticle => article.data.id === listArticle.data.id)[0]
+        dispatch(changeCurrentArticle(currentArticle));
     }
 
+    let content;
+    if (article.data.is_video) {
+        content = <video typeof="video/mp4" src={article.data.secure_media.reddit_video.fallback_url} width="80%" controls ></video>
+    } else if (article.data.post_hint === "image") {
+        content = <img src={article.data.url} alt='post image'/>
+    } else {
+        
+    }
+
+    const timeSince = timeSinceCreation(article.data.created);
+
     return (
-        <article>
-            <div className='vote'>
+        <article key={article.data.id}>
+            <div className='vote'>    
                 <FontAwesomeIcon icon={faArrowUp} color='darkgray'/>
-                <span>{article.voteCount}</span>
+                <span>{article.data.score}</span>
                 <FontAwesomeIcon icon={faArrowDown} color='darkgray'/>
             </div>
             <div className='card'>
-                <Link to={`../article/${article.id}`}><h2 className='card-title' onClick={handleClick}>{article.title}</h2></Link>
-                <img src={article.imgSrc} />
+                <Link to={`../article/${article.data.id}`}><h2 className='card-title' onClick={handleClick}>{article.data.title}</h2></Link>
+                <p className='subreddit'>r/{article.data.subreddit}</p>
+                {content}
                 <div className='divider' />
                 <div className='byline'>
-                    <p>Posted by <span className='author'>{article.author}</span></p>
-                    <p>{article.time}</p>
+                    <p>Posted by <span className='author'>{article.data.author}</span></p>
+                    <p>{timeSince}</p>
                     <p> | </p>
-                    <div className='comments'>
+                    <div id='comments'>
                         <FontAwesomeIcon icon={faMessage} color='darkgray'/>
-                        <p>{article.commentCount}</p>
+                        <p>{article.data.num_comments}</p>
                     </div>
                 </div>
             </div>

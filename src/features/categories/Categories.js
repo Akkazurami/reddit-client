@@ -8,8 +8,10 @@ import { changeCategory, selectCategory } from './categoriesSlice';
 
 const categories = [
     "Popular",
+    "News",
     "Politics",
-    "Writing"
+    "Writing",
+    "VideoGames"
 ];
 
 export default function Categories(props) {
@@ -27,9 +29,9 @@ export default function Categories(props) {
             <ul>
                 {categories.map(option => {
                     if (option === category) {
-                        return <Link to={`../category/${option}`} ><li className='active' key={option}>{option}</li></Link> 
+                        return <Link to={`../category/${option}`} key={option}><li className='active' >{option}</li></Link> 
                     } else {
-                        return <Link to={`../category/${option}`} ><li onClick={handleClick} key={option}>{option}</li></Link>
+                        return <Link to={`../category/${option}`} key={option}><li onClick={handleClick} >{option}</li></Link>
                     }
                 })}
             </ul>

@@ -5,6 +5,13 @@
     background-color: green;
     border-radius: 15px;
     box-shadow: 5px 5px 5px 5px darkgreen;
+    max-width: 40%;
+}
+
+#loading {
+    color: green;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 main {
