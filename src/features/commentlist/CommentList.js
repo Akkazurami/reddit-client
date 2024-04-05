@@ -5,15 +5,16 @@ import './CommentList.css';
 
 import Comment from "../../components/comment/Comment";
 
-import { selectComments } from "./commentsSlice";
+export default function CommentList({comments}) {
 
-export default function CommentList() {
-    const comments = useSelector(selectComments);
+    if (comments.length < 1) {
+        return <section className="comments"><h4 className="comments-title">Comments</h4><p className="comment">Loading Comments...</p></section>
+    }
 
     return (
         <section className="comments">
             <h4 className="comments-title">Comments</h4>
-            {comments.map(comment => <Comment comment={comment}/>)}
+            {comments.map(comment => comment.kind !== 'more' ? <Comment comment={comment.data}/> : "")}
         </section>
     )
 }

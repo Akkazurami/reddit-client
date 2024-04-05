@@ -24,10 +24,23 @@ export const loadArticle = createAsyncThunk(
     }
 )
 
+export const searchArticles = createAsyncThunk(
+    'articles/searchArticles',
+    async (searchTerm) => {
+        const response = await fetch(`https://www.reddit.com/search.json?q=${searchTerm}`,
+        {
+            method: 'GET'
+        })
+        .then(response => response.json());
+    return response;
+    }
+)
+
 const articlesSlice = createSlice({
     name: 'articles',
     initialState: {
         currentArticle: "",
+        currentArticleComments: [],
         articles: [],
         loadingArticles: false,
         failedToLoadArticles: false
@@ -38,6 +51,9 @@ const articlesSlice = createSlice({
         },
         changeArticles(state, action) {
             return {...state, articles: action.payload};
+        },
+        clearComments(state) {
+            return {...state, currentArticleComments: []};
         }
     },
     extraReducers: {
@@ -73,16 +89,42 @@ const articlesSlice = createSlice({
             }
         },
         [loadArticle.fulfilled]: (state, action) => {
-            const data = action.payload[0].data.children[0];
+            const articleData = action.payload[0].data.children[0];
+            const commentsData = action.payload[1].data.children;
+
 
             return {
                 ...state,
                 loadingArticles: false,
                 failedToLoadArticles: false,
-                currentArticle: data
+                currentArticle: articleData,
+                currentArticleComments: commentsData
             }
         },
         [loadArticle.rejected]: (state) => {
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: true
+            }
+        },
+        [searchArticles.pending]: (state) => {
+            return {
+                ...state,
+                loadingArticles: true,
+                failedToLoadArticles: false
+            }
+        },
+        [searchArticles.fulfilled]: (state, action) => {
+            const data = action.payload.data.children;
+            return {
+                ...state,
+                loadingArticles: false,
+                failedToLoadArticles: false,
+                articles: data
+            }
+        },
+        [searchArticles.rejected]: (state, action) => {
             return {
                 ...state,
                 loadingArticles: false,
@@ -94,8 +136,9 @@ const articlesSlice = createSlice({
 
 export const selectArticles = (state) => state.articles.articles;
 export const selectCurrentArticle = (state) => state.articles.currentArticle;
+export const selectComments = (state) => state.articles.currentArticleComments;
 export const isLoadingArticles = (state) => state.articles.loadingArticles;
 
-export const { changeArticles, changeCurrentArticle } = articlesSlice.actions;
+export const { changeArticles, changeCurrentArticle, clearComments } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

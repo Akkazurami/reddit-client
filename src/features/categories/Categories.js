@@ -11,7 +11,7 @@ const categories = [
     "News",
     "Politics",
     "Writing",
-    "VideoGames"
+    "Gaming"
 ];
 
 export default function Categories(props) {
