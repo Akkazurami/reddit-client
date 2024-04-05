@@ -5,7 +5,7 @@ import { faArrowUp, faArrowDown, faMessage } from '@fortawesome/free-solid-svg-i
 import './Card.css';
 import { Link } from 'react-router-dom';
 
-import { changeCurrentArticle, selectArticles } from '../../features/articlelist/articlesSlice';
+import { changeCurrentArticle, clearComments, loadArticle, selectArticles } from '../../features/articlelist/articlesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { timeSinceCreation } from '../../util/util';
@@ -16,8 +16,10 @@ export default function Card({article}) {
     const articles = useSelector(selectArticles);
 
     const handleClick = () => {
-        const currentArticle = articles.filter(listArticle => article.data.id === listArticle.data.id)[0]
+        const currentArticle = articles.filter(listArticle => article.data.id === listArticle.data.id)[0];
+        dispatch(clearComments());
         dispatch(changeCurrentArticle(currentArticle));
+        dispatch(loadArticle(currentArticle.data.id));
     }
 
     let content;

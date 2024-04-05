@@ -5,6 +5,7 @@ import './SearchBar.css';
 import search from '../../assets/search.png';
 
 import { changeSearchTerm, clearSearchTerm, selectSearchTerm } from "./searchBarSlice";
+import { searchArticles } from "../articlelist/articlesSlice";
 
 export function SearchBar() {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export function SearchBar() {
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
+            dispatch(searchArticles(searchTerm));
             dispatch(clearSearchTerm());
         }
     }

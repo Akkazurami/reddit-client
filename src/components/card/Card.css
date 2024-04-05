@@ -58,7 +58,8 @@ a h2{
 
 .byline {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0 50px;
 }
 
 .author {
